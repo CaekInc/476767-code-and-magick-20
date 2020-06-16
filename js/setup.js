@@ -72,6 +72,8 @@ var wizards = [
 
 // similarListElement.appendChild(fragment);
 
+//  Это способ почему то не работает. Оставил посмотреть в чем проблема.
+
 for (var i = 0; i < wizards.length; i++) {
   var wizardElement = similatWizardTemplate.cloneNode(true);
   wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
