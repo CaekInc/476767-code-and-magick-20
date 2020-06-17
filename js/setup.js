@@ -17,7 +17,7 @@ var randomInteger = function (min, max) {
 };
 
 var getRandomElementFrom = function (array) {
-  return array[randomInteger(0, array.length)];
+  return array[randomInteger(0, array.length - 1)];
 };
 
 
