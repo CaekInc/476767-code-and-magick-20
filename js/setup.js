@@ -79,11 +79,32 @@ var onPopupEscPress = function (evt) {
 var openPopup = function () {
   setupBlock.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
+
+  changeWizardCoat.addEventListener('click', function () {
+    changeWizardCoat.style.fill = changeItem(WIZARD_COATS);
+    coatColorInput.value = changeWizardCoat.style.fill;
+  });
+  changeWizardEyes.addEventListener('click', function () {
+    changeWizardEyes.style.fill = changeItem(WIZARD_EYES);
+    eyesColorInput.value = changeWizardEyes.style.fill;
+  });
+  changeWizardFireball.addEventListener('click', function () {
+    changeWizardFireball.style.backgroundColor = changeItem(WIZARDS_FIREBALL_COLORS);
+    fireballColorInput.value = changeWizardFireball.style.backgroundColor;
+  });
+
 };
 
 var closePopup = function () {
   setupBlock.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  changeWizardCoat.removeEventListener('click', function () {
+  });
+  changeWizardEyes.removeEventListener('click', function () {
+  });
+  changeWizardFireball.removeEventListener('click', function () {
+  });
+
 };
 
 setupOpenButton.addEventListener('click', function () {
@@ -136,17 +157,3 @@ var fireballColorInput = document.querySelector('input[name="fireball-color"]');
 var coatColorInput = document.querySelector('input[name="coat-color"]');
 var eyesColorInput = document.querySelector('input[name="eyes-color"]');
 
-changeWizardCoat.addEventListener('click', function () {
-  changeWizardCoat.style.fill = changeItem(WIZARD_COATS);
-  coatColorInput.value = changeWizardCoat.style.fill;
-});
-
-changeWizardEyes.addEventListener('click', function () {
-  changeWizardEyes.style.fill = changeItem(WIZARD_EYES);
-  eyesColorInput.value = changeWizardEyes.style.fill;
-});
-
-changeWizardFireball.addEventListener('click', function () {
-  changeWizardFireball.style.backgroundColor = changeItem(WIZARDS_FIREBALL_COLORS);
-  fireballColorInput.value = changeWizardFireball.style.backgroundColor;
-});
