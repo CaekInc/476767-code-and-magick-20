@@ -76,21 +76,33 @@ var onPopupEscPress = function (evt) {
   }
 };
 
+var changeWizardCoat = function () {
+  wizardCoat.style.fill = changeItem(WIZARD_COATS);
+  coatColorInput.value = wizardCoat.style.fill;
+};
+
+var changeWizardEyes = function () {
+  wizardEyes.style.fill = changeItem(WIZARD_EYES);
+  eyesColorInput.value = wizardEyes.style.fill;
+};
+
+var changeWizardFireball = function () {
+  wizardFireball.style.backgroundColor = changeItem(WIZARDS_FIREBALL_COLORS);
+  fireballColorInput.value = wizardFireball.style.backgroundColor;
+};
+
 var openPopup = function () {
   setupBlock.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 
-  changeWizardCoat.addEventListener('click', function () {
-    changeWizardCoat.style.fill = changeItem(WIZARD_COATS);
-    coatColorInput.value = changeWizardCoat.style.fill;
+  wizardCoat.addEventListener('click', function () {
+    changeWizardCoat();
   });
-  changeWizardEyes.addEventListener('click', function () {
-    changeWizardEyes.style.fill = changeItem(WIZARD_EYES);
-    eyesColorInput.value = changeWizardEyes.style.fill;
+  wizardEyes.addEventListener('click', function () {
+    changeWizardEyes();
   });
-  changeWizardFireball.addEventListener('click', function () {
-    changeWizardFireball.style.backgroundColor = changeItem(WIZARDS_FIREBALL_COLORS);
-    fireballColorInput.value = changeWizardFireball.style.backgroundColor;
+  wizardFireball.addEventListener('click', function () {
+    changeWizardFireball();
   });
 
 };
@@ -99,10 +111,13 @@ var closePopup = function () {
   setupBlock.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
   changeWizardCoat.removeEventListener('click', function () {
+    changeWizardCoat();
   });
   changeWizardEyes.removeEventListener('click', function () {
+    changeWizardEyes();
   });
   changeWizardFireball.removeEventListener('click', function () {
+    changeWizardFireball();
   });
 
 };
@@ -149,11 +164,10 @@ var changeItem = function (array) {
   return array[index];
 };
 
-var changeWizardCoat = document.querySelector('.wizard-coat');
-var changeWizardEyes = document.querySelector('.wizard-eyes');
-var changeWizardFireball = document.querySelector('.setup-fireball-wrap');
+var wizardCoat = document.querySelector('.wizard-coat');
+var wizardEyes = document.querySelector('.wizard-eyes');
+var wizardFireball = document.querySelector('.setup-fireball-wrap');
 
 var fireballColorInput = document.querySelector('input[name="fireball-color"]');
 var coatColorInput = document.querySelector('input[name="coat-color"]');
 var eyesColorInput = document.querySelector('input[name="eyes-color"]');
-
