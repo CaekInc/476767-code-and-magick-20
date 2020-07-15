@@ -1,12 +1,11 @@
 'use strict';
-var setupBlock = document.querySelector('.setup');
-setupBlock.classList.remove('hidden');
-
 var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var WIZARD_SURNAMES = ['де Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var WIZARD_COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var WIZARD_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARDS_NUMBER = 4;
+var WIZARDS_FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var setupBlock = document.querySelector('.setup');
 var similarListElement = setupBlock.querySelector('.setup-similar-list');
 var similatWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
@@ -61,3 +60,99 @@ setupBlock.querySelector('.setup-similar').classList.remove('hidden');
 var wizards = getWizards(WIZARDS_NUMBER);
 var wizardFragment = renderFragment(wizards);
 similarListElement.appendChild(wizardFragment);
+
+// 2 взаимодействие с формами
+
+var setupOpenButton = document.querySelector('.setup-open');
+var setupCloseButton = document.querySelector('.setup-close');
+var userName = document.querySelector('.setup-user-name');
+var setupForm = document.querySelector('.setup-wizard-form');
+var submitSetupButton = document.querySelector('.setup-submit');
+
+var onPopupEscPress = function (evt) {
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    closePopup();
+  }
+};
+
+var changeWizardCoat = function () {
+  wizardCoat.style.fill = changeItem(WIZARD_COATS);
+  coatColorInput.value = wizardCoat.style.fill;
+};
+
+var changeWizardEyes = function () {
+  wizardEyes.style.fill = changeItem(WIZARD_EYES);
+  eyesColorInput.value = wizardEyes.style.fill;
+};
+
+var changeWizardFireball = function () {
+  wizardFireball.style.backgroundColor = changeItem(WIZARDS_FIREBALL_COLORS);
+  fireballColorInput.value = wizardFireball.style.backgroundColor;
+};
+
+var openPopup = function () {
+  setupBlock.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+  wizardCoat.addEventListener('click', changeWizardCoat);
+  wizardEyes.addEventListener('click', changeWizardEyes);
+  wizardFireball.addEventListener('click', changeWizardFireball);
+};
+
+var closePopup = function () {
+  setupBlock.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+  changeWizardCoat.removeEventListener('click', changeWizardCoat);
+  changeWizardEyes.removeEventListener('click', changeWizardEyes);
+  changeWizardFireball.removeEventListener('click', changeWizardFireball);
+};
+
+setupOpenButton.addEventListener('click', function () {
+  openPopup();
+});
+setupOpenButton.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    openPopup();
+  }
+});
+
+setupCloseButton.addEventListener('click', function () {
+  closePopup();
+});
+setupCloseButton.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    if (!userName.onfocus()) {
+      closePopup();
+    }
+  } else if (evt.key === 'Enter') {
+    closePopup();
+  }
+});
+
+// если добавление type="submit" не считается валидным
+
+submitSetupButton.addEventListener('click', function () {
+  setupForm.submit();
+});
+submitSetupButton.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    setupForm.submit();
+  }
+});
+//  Выбор цвета глаз, плаща etc
+var index = 0;
+var changeItem = function (array) {
+  index++;
+  if (index >= array.length) {
+    index = 0;
+  }
+  return array[index];
+};
+
+var wizardCoat = document.querySelector('.wizard-coat');
+var wizardEyes = document.querySelector('.wizard-eyes');
+var wizardFireball = document.querySelector('.setup-fireball-wrap');
+
+var fireballColorInput = document.querySelector('input[name="fireball-color"]');
+var coatColorInput = document.querySelector('input[name="coat-color"]');
+var eyesColorInput = document.querySelector('input[name="eyes-color"]');
