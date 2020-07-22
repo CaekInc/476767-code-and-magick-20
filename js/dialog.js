@@ -79,8 +79,6 @@
     }
   });
 
-
-
   //  Выбор цвета глаз, плаща etc
   var wizardCoat = document.querySelector('.wizard-coat');
   var wizardEyes = document.querySelector('.wizard-eyes');
