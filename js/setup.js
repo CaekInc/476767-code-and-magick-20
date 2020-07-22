@@ -1,23 +1,34 @@
 'use strict';
-var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var WIZARD_SURNAMES = ['де Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var WIZARD_COATS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var WIZARD_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
-var WIZARDS_NUMBER = 4;
-var WIZARDS_FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-var setupBlock = document.querySelector('.setup');
-var similarListElement = setupBlock.querySelector('.setup-similar-list');
-var similatWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+(function () {
+  var fireballSize = 22;
+  var wizardWidth = 70;
+  var wizardSpeed = 3;
 
-var randomInteger = function (min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
+  function getWizardHeight () {
+    return 1.337 * wizardWidth;
+  }
 
-var getRandomElementFrom = function (array) {
-  return array[randomInteger(0, array.length - 1)];
-};
+  function getFireballSpeed (isWind) {
+    return (isWind ? 5 : 2);
+  }
+
+  function getWizardX (gameFieldWidth) {
+    return (gameFieldWidth - wizardWidth) / 2;
+  }
+
+  function getWizardY (gameFieldHeight) {
+    return gameFieldHeight / 3;
+  }
+
+  window.fireballSize = fireballSize;
+  window.wizardWidth = wizardWidth;
+  window.wizardSpeed = wizardSpeed;
+  window.getWizardHeight = getWizardHeight;
+  window.getFireballSpeed = getFireballSpeed;
+  window.getWizardX = getWizardX;
+  window.getWizardY = getWizardY;
+
+})();
 
 
 var getRandomWizard = function () {
@@ -63,8 +74,7 @@ similarListElement.appendChild(wizardFragment);
 
 // 2 взаимодействие с формами
 
-var setupOpenButton = document.querySelector('.setup-open');
-var setupCloseButton = document.querySelector('.setup-close');
+
 var userName = document.querySelector('.setup-user-name');
 var setupForm = document.querySelector('.setup-wizard-form');
 var submitSetupButton = document.querySelector('.setup-submit');
@@ -140,14 +150,7 @@ submitSetupButton.addEventListener('keydown', function (evt) {
   }
 });
 //  Выбор цвета глаз, плаща etc
-var index = 0;
-var changeItem = function (array) {
-  index++;
-  if (index >= array.length) {
-    index = 0;
-  }
-  return array[index];
-};
+
 
 var wizardCoat = document.querySelector('.wizard-coat');
 var wizardEyes = document.querySelector('.wizard-eyes');
