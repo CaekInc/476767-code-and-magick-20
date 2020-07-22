@@ -16,17 +16,17 @@
   };
 
   var changeWizardCoat = function () {
-    wizardCoat.style.fill = window.util.changeItem(window.wizardData.WIZARD_COATS);
+    wizardCoat.style.fill = window.util.changeItem(window.wizardsData.WIZARD_COATS);
     coatColorInput.value = wizardCoat.style.fill;
   };
 
   var changeWizardEyes = function () {
-    wizardEyes.style.fill = window.util.changeItem(window.wizardData.WIZARD_EYES);
+    wizardEyes.style.fill = window.util.changeItem(window.wizardsData.WIZARD_EYES);
     eyesColorInput.value = wizardEyes.style.fill;
   };
 
   var changeWizardFireball = function () {
-    wizardFireball.style.backgroundColor = window.util.changeItem(window.wizardData.WIZARDS_FIREBALL_COLORS);
+    wizardFireball.style.backgroundColor = window.util.changeItem(window.wizardsData.WIZARDS_FIREBALL_COLORS);
     fireballColorInput.value = wizardFireball.style.backgroundColor;
   };
 
@@ -36,6 +36,7 @@
     wizardCoat.addEventListener('click', changeWizardCoat);
     wizardEyes.addEventListener('click', changeWizardEyes);
     wizardFireball.addEventListener('click', changeWizardFireball);
+    window.dragAndDrop.init();
   };
 
   var closePopup = function () {
@@ -44,6 +45,7 @@
     changeWizardCoat.removeEventListener('click', changeWizardCoat);
     changeWizardEyes.removeEventListener('click', changeWizardEyes);
     changeWizardFireball.removeEventListener('click', changeWizardFireball);
+    window.dragAndDrop.destroy();
   };
 
   setupOpenButton.addEventListener('click', function () {
@@ -76,9 +78,10 @@
       setupForm.submit();
     }
   });
+
+
+
   //  Выбор цвета глаз, плаща etc
-
-
   var wizardCoat = document.querySelector('.wizard-coat');
   var wizardEyes = document.querySelector('.wizard-eyes');
   var wizardFireball = document.querySelector('.setup-fireball-wrap');
